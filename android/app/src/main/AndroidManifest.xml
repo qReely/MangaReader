@@ -1,0 +1,85 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.untitled1">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"  android:maxSdkVersion="29"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+   <application
+        android:label="Manga Reader"
+        android:requestLegacyExternalStorage="true"
+        tools:replace="android:label"
+        android:name="${applicationName}"
+        android:icon="@mipmap/launcher_icon">
+
+       <!-- Begin FlutterDownloader customization -->
+       <!-- disable default Initializer -->
+       <provider
+           android:name="androidx.startup.InitializationProvider"
+           android:authorities="${applicationId}.androidx-startup"
+           android:exported="false"
+           tools:node="merge">
+           <meta-data
+               android:name="androidx.work.WorkManagerInitializer"
+               android:value="androidx.startup"
+               tools:node="remove" />
+       </provider>
+
+       <!-- declare customized Initializer -->
+       <provider
+           android:name="vn.hunghd.flutterdownloader.FlutterDownloaderInitializer"
+           android:authorities="${applicationId}.flutter-downloader-init"
+           android:exported="false">
+           <!-- changes this number to configure the maximum number of concurrent tasks -->
+           <meta-data
+               android:name="vn.hunghd.flutterdownloader.MAX_CONCURRENT_TASKS"
+               android:value="5" />
+       </provider>
+       <!-- End FlutterDownloader customization -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="manga_notification_id"
+                />
+            <intent-filter>
+                <action android:name="FLUTTER_NOTIFICATION_CLICK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+           <intent-filter>
+               <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+           </intent-filter>
+       </receiver>
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>
