@@ -10,7 +10,6 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 
 import '../asura.dart';
 import '../generated/manga.dart';
@@ -96,7 +95,9 @@ class _MangaTileState extends State<MangaTile> {
   }
 
   cancelDownload() {
-    ids.forEach((element) {FlutterDownloader.cancel(taskId: element!);});
+    for (var element in ids) {
+      FlutterDownloader.cancel(taskId: element!);
+    }
     deleteImages();
   }
 
@@ -115,7 +116,7 @@ class _MangaTileState extends State<MangaTile> {
     await downloadCompleted.future.whenComplete(() {
       widget.manga.chapters[widget.chapter].isDownloading = false;
       Asura.getInstance().putManga(widget.manga);
-      Manga manga = Asura.getInstance().box.get(widget.manga.title);
+      // Manga manga = Asura.getInstance().box.get(widget.manga.title);
       ids.clear();
       setState(() {
 
@@ -131,7 +132,6 @@ class _MangaTileState extends State<MangaTile> {
     }
     widget.manga.chapters[widget.chapter].imagePaths.clear();
     Asura.getInstance().putManga(widget.manga);
-    // Hive.box("asurascans").put(_manga.title, _manga);
   }
 
 
@@ -169,12 +169,6 @@ class _MangaTileState extends State<MangaTile> {
               setState(() {
 
               });
-              // download or delete chapter
-              // if(_chaptersToDownload.contains(idx)) {
-              //   _chaptersToDownload.remove(idx);
-              //   return;
-              // }
-              // download images
             },
             icon: widget.manga.chapters[widget.chapter].isDownloading ? (Stack(
               children: [
@@ -185,7 +179,7 @@ class _MangaTileState extends State<MangaTile> {
                       cancelDownload();
                       Future.delayed(Duration(seconds: 3));
                       setState(() {
-
+                        // TODO - CANCEL DOWNLOAD
                       });
                     },
                   ),
@@ -309,10 +303,8 @@ class _MangaTileState extends State<MangaTile> {
                   TextButton(onPressed: (){
                     // select - deselect all
                     MangaDetail.selectedChapters.clear();
-                    print(MangaDetail.selectedChapters);
                     if(!allSelected) {
                       MangaDetail.selectedChapters.addAll([for(int i = 0; i < widget.manga.totalChapters; i++) i]);
-                      print(MangaDetail.selectedChapters);
                     }
                     MangaDetail.selectAll();
                     setState(() {

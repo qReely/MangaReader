@@ -9,7 +9,7 @@ enum CurrentBox{
 
  String getUrl(){
    switch(this) {
-     case CurrentBox.asurascans: return "http://asura.gg/manga";
+     case CurrentBox.asurascans: return "https://asuracomics.com/manga";
      case CurrentBox.reaperscans: return "";
 
      default: return "";

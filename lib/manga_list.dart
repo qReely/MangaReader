@@ -67,7 +67,6 @@ class _MangaListState extends State<MangaList> {
     }
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
       child: SingleChildScrollView(
         controller: controller,
         child: Column(
@@ -89,7 +88,7 @@ class _MangaListState extends State<MangaList> {
               shrinkWrap: true,
               mainAxisSpacing: 10,
               crossAxisSpacing: 5,
-              childAspectRatio: 0.6,
+              childAspectRatio: 0.65,
               padding: const EdgeInsets.symmetric(
                   vertical: 0, horizontal: 5),
               crossAxisCount: 2,
@@ -102,7 +101,7 @@ class _MangaListState extends State<MangaList> {
               shrinkWrap: true,
               mainAxisSpacing: 10,
               crossAxisSpacing: 5,
-              childAspectRatio: 0.6,
+              childAspectRatio: 0.65,
               padding: const EdgeInsets.symmetric(
                   vertical: 0, horizontal: 5),
               crossAxisCount: 2,
@@ -115,7 +114,7 @@ class _MangaListState extends State<MangaList> {
               shrinkWrap: true,
               mainAxisSpacing: 10,
               crossAxisSpacing: 5,
-              childAspectRatio: 0.6,
+              childAspectRatio: 0.65,
               padding: const EdgeInsets.symmetric(
                   vertical: 0, horizontal: 5),
               crossAxisCount: 2,

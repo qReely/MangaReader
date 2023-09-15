@@ -43,7 +43,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
         shrinkWrap: true,
         mainAxisSpacing: 10,
         crossAxisSpacing: 5,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.65,
         padding:
         const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
         crossAxisCount: 2,

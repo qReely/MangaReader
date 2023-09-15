@@ -8,8 +8,6 @@ import 'package:MangaReader/pages/downloading_service.dart';
 import 'package:MangaReader/pages/manga_description.dart';
 import 'package:MangaReader/pages/manga_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_icons/icons8.dart';
-import 'package:flutter_animated_icons/lordicon.dart';
 import 'package:flutter_animated_icons/lottiefiles.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:http/http.dart' as http;

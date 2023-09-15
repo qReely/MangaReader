@@ -1,7 +1,6 @@
 import 'package:MangaReader/pages/favourites_page.dart';
 import 'package:MangaReader/pages/home_page.dart';
 import 'package:MangaReader/pages/settings_page.dart';
-import 'package:MangaReader/parsers/asura_client_parser.dart';
 import 'package:MangaReader/parsers/asura_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -16,12 +15,10 @@ class BottomNav extends StatefulWidget {
   @override
   State<BottomNav> createState() => _BottomNavState();
 
-  Future<void> updateMangas(AsuraClientParser parser) async {
-    parser.loadManga();
-  }
 }
 
 class _BottomNavState extends State<BottomNav> {
+  int delay = 120;
 
   @override
   void initState() {
@@ -34,13 +31,13 @@ class _BottomNavState extends State<BottomNav> {
     if (status.isGranted) {
       if(Hive.box("asurascans").length <= 1) {
         Workmanager().registerPeriodicTask("loadManga", "loadManga",
-          frequency: const Duration(minutes: 120),
+          frequency: Duration(minutes: delay),
           constraints: Constraints(networkType: NetworkType.connected,),
           existingWorkPolicy: ExistingWorkPolicy.keep,
-          initialDelay: const Duration(minutes: 120),
+          initialDelay: Duration(minutes: delay),
         );
         Workmanager();
-        Asura.getInstance().box.put("delay", 120);
+        Asura.getInstance().box.put("delay", delay);
         AsuraParser().loadManga();
       }
     }
